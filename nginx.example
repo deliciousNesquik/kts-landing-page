@@ -1,0 +1,46 @@
+﻿# Это конфигурация виртуального сервера для обратного проксирования (reverse proxy).
+#
+# Схема того как nginx обрабатывает запросы от пользователя.
+# Клиент → nginx (80/443 порт)
+#          ↓
+#     /api/* → localhost:5001 (бэкенд)
+#     /*     → localhost:3000 (фронтенд)
+
+# Типичное применение:
+#   Разделение трафика между фронтендом (React/Vue/Svelte и т.д.)
+#   и бэкендом (API на Node.js, Python, .NET и т.д.) через единый домен.
+
+
+
+server {
+
+#   Определяет, для каких доменных имен будет использоваться этот серверный блок.
+#   Nginx будет обрабатывать запросы, направленные на эти домены.
+    server_name komtransservice-spb.ru www.komtransservice-spb.ru;
+
+
+#   Проксирование всех запросов, начинающихся с /api/, на бэкенд-сервер на порту 5001.
+#   proxy_pass — перенаправляет запросы на http://localhost:5001
+#   proxy_set_header — передаёт заголовки от клиента на бэкенд
+#   Host — оригинальное имя хоста.
+#   X-Real-IP — реальный IP-адрес клиента
+#   X-Forwarded-For — цепочка прокси-серверов
+#   X-Forwarded-Proto — протокол (http/https)
+    location /api/ {
+        proxy_pass http://localhost:5001;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+
+#   Проксирование всех остальных запросов (не /api/) на фронтенд-сервер на порту 3000.
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}

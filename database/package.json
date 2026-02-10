@@ -1,0 +1,26 @@
+{
+  "name": "komtransservice-database",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./sqlite_connector": "./connectors/sqlite_connector.js",
+    "./repositories/notifications": "./repositories/notifications.js"
+  },
+  "files": [
+    "index.js",
+    "./connectors/sqlite_connector.js",
+    "repositories/"
+  ],
+  "keywords": ["database", "sqlite", "repository"],
+  "author": "deliciousNesquik",
+  "license": "ISC",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.4",
+    "sqlite3": "^5.1.5"
+  }
+}
