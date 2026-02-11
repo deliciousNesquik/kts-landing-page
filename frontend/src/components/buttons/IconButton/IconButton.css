@@ -1,0 +1,60 @@
+@import '../styles/variables.css';
+
+.icon-button {
+    /* Мобильные стили по умолчанию */
+    width: var(--btn-icon-size);
+    height: var(--btn-icon-size);
+    padding: var(--btn-icon-padding);
+    border-radius: var(--btn-border-radius);
+    background-color: var(--color-surface-primary);
+    border: 1px solid var(--color-surface-secondary);
+    color: var(--color-text-primary);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.icon-button--inverse {
+    background-color: var(--color-canvas-secondary);
+    color: var(--color-text-inverse);
+}
+
+/* Планшет (768px и выше) */
+@media (min-width: 768px) {
+    .icon-button {
+        width: 44px;
+        height: 44px;
+        padding: 12px;
+    }
+}
+
+/* Десктоп (1024px и выше) */
+@media (min-width: 1024px) {
+    .icon-button {
+        width: 48px;
+        height: 48px;
+        padding: 14px;
+    }
+}
+
+/* Большие экраны (1440px и выше) */
+@media (min-width: 1440px) {
+    .icon-button {
+        width: 52px;
+        height: 52px;
+        padding: 16px;
+    }
+}
+
+.icon-button:hover:not(:disabled) {
+    opacity: 0.8;
+}
+
+.icon-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

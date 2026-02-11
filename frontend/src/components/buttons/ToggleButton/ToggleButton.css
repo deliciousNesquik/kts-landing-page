@@ -1,0 +1,79 @@
+@import '../styles/variables.css';
+
+.toggle-button {
+    padding: var(--btn-cta-padding-vertical) var(--btn-cta-padding-horizontal);
+    border-radius: var(--btn-border-radius);
+    background-color: var(--color-surface-primary);
+    border: 1px solid var(--color-surface-secondary);
+    color: var(--color-text-primary);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--btn-gap);
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.toggle-button--active {
+    background-color: var(--color-accent);
+    color: var(--color-text-inverse);
+}
+
+.toggle-button:hover:not(:disabled) {
+    opacity: 0.8;
+}
+
+.toggle-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.toggle-button__icon {
+    display: flex;
+    align-items: center;
+    width: 16px;
+    height: 16px;
+}
+
+.toggle-button__text {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* Планшет (768px и выше) */
+@media (min-width: 768px) {
+    .toggle-button__icon {
+        width: 20px;
+        height: 20px;
+    }
+    .toggle-button__text {
+        font-size: 20px;
+        font-weight: 700;
+    }
+}
+
+/* Десктоп (1024px и выше) */
+@media (min-width: 1024px) {
+    .toggle-button__icon {
+        width: 24px;
+        height: 24px;
+    }
+    .toggle-button__text {
+        font-size: 24px;
+        font-weight: 700;
+    }
+}
+
+/* Большие экраны (1440px и выше) */
+@media (min-width: 1440px) {
+    .toggle-button__icon {
+        width: 24px;
+        height: 24px;
+    }
+    .toggle-button__text {
+        font-size: 24px;
+        font-weight: 700;
+    }
+}

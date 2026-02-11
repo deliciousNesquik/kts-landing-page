@@ -1,0 +1,54 @@
+.search-layout {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .search-layout {
+        flex-direction: column;
+    }
+}
+
+@media (min-width: 1024px) {
+    .search-layout {
+        flex-direction: row;
+    }
+}
+@media (min-width: 1440px) {
+    .search-layout {
+        flex-direction: row;
+    }
+}
+
+/* assets/page/vans.css */
+.vans-controls {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: start;
+    margin: 32px 0;
+    max-width: 1200px;
+}
+
+.vans-results {
+    margin: 24px 0;
+    max-width: 1200px;
+}
+
+.view-toggle {
+    display: flex;
+    gap: 12px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .vans-controls {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .view-toggle {
+        justify-content: center;
+    }
+}

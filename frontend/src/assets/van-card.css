@@ -1,0 +1,144 @@
+/* Базовые стили (мобильные first) */
+.van-card {
+    width: 280px;
+    height: 380px;
+    padding: 15px;
+
+    border: 1px solid var(--color-surface-secondary);
+    border-radius: 20px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    background: var(--color-surface-primary);
+}
+
+.van-card--content {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    background: var(--color-surface-secondary);
+}
+
+.van-card--image {
+    width: 100%;
+    height: 140px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    overflow: clip;
+}
+
+.van-card--image img {
+    height: 100%;
+}
+
+.van-card--flags {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+.van-card--title {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.van-card--name {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    color: var(--color-text-primary);
+    font-family: SF Pro Rounded, system-ui;
+    font-size: 28px;
+    font-weight: 700;
+    text-align: left;
+}
+
+.van-card--category {
+    width: 100%;
+    height: 19px;
+    color: var(--color-text-secondary);
+    font-family: SF Pro Rounded, system-ui;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: left;
+}
+
+.van-card--description {
+    width: 100%;
+    opacity: 0.7;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    color: var(--color-text-secondary);
+    font-family: SF Pro Rounded, system-ui;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: left;
+}
+
+/* 768px и выше */
+@media (min-width: 768px) {
+    .van-card {
+        width: 290px;
+        height: 380px;
+    }
+
+    .van-card--image {
+        height: 150px;
+    }
+
+    .van-card--name {
+        font-size: 30px;
+    }
+
+    .van-card--category {
+        font-size: 15px;
+    }
+}
+
+/* 1024px и выше */
+@media (min-width: 1024px) {
+    .van-card {
+        width: 300px;
+        height: 400px;
+    }
+
+    .van-card--name {
+        font-size: 32px;
+    }
+
+    .van-card--category {
+        font-size: 16px;
+    }
+}
+
+/* 1440px и выше */
+@media (min-width: 1440px) {
+    .van-card {
+        width: 320px;
+        height: 420px;
+    }
+
+    .van-card--image {
+        height: 160px;
+    }
+}

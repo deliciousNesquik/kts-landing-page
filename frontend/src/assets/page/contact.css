@@ -1,0 +1,52 @@
+/* Контейнер для карты */
+.map-container {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Адаптивная карта */
+.responsive-map {
+    width: 100%;
+    height: 400px;
+    border: none;
+    display: block;
+}
+
+/* Отступы */
+.spacer {
+    width: 100%;
+    height: 15px;
+}
+
+/* Разделители */
+.divider {
+    width: 100%;
+    height: 1px;
+    background-color: #999999;
+    opacity: 0.2;
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+    .responsive-map {
+        height: 300px;
+    }
+
+    .spacer {
+        height: 12px;
+    }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 480px) {
+    .responsive-map {
+        height: 250px;
+    }
+
+    .spacer {
+        height: 10px;
+    }
+}

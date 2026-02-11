@@ -1,0 +1,71 @@
+.heading {
+    font-weight: 700;
+    transition: all 0.2s ease-in-out;
+    font-family: inherit;
+    color: var(--color-text-primary);
+}
+
+.heading--color-inverse {
+    color: var(--color-text-inverse);
+}
+
+.heading--level-1 {
+    font-size: 24px;
+}
+
+.heading--level-2 {
+    font-size: 20px;
+}
+
+.heading--level-3 {
+    font-size: 18px;
+}
+
+
+/* === ПЛАНШЕТ (768px и выше) === */
+
+@media (min-width: 768px) {
+    .heading--level-1 {
+        font-size: 32px;
+    }
+
+    .heading--level-2 {
+        font-size: 24px;
+    }
+
+    .heading--level-3 {
+        font-size: 20px;
+    }
+}
+
+/* === ДЕСКТОП (1024px и выше) === */
+
+@media (min-width: 1024px) {
+    .heading--level-1 {
+        font-size: 36px;
+    }
+
+    .heading--level-2 {
+        font-size: 28px;
+    }
+
+    .heading--level-3 {
+        font-size: 22px;
+    }
+}
+
+/* === БОЛЬШИЕ ЭКРАНЫ (1440px и выше) === */
+
+@media (min-width: 1440px) {
+    .heading--level-1 {
+        font-size: 40px;
+    }
+
+    .heading--level-2 {
+        font-size: 32px;
+    }
+
+    .heading--level-3 {
+        font-size: 24px;
+    }
+}

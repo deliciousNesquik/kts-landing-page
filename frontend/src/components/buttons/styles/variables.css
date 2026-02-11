@@ -1,0 +1,19 @@
+:root {
+    --btn-bg-icon: #EEEEEE;
+    --btn-bg-toggle-inactive: #EEEEEE;
+    --btn-bg-toggle-active: #E9152D;
+    --btn-bg-primary: #E9152D;
+    --btn-bg-secondary: #333333;
+    --btn-border: #DEDEDE;
+    --btn-fg-primary: #DEDEDE;
+
+    --btn-icon-size: 36px;
+    --btn-icon-padding: 10px;
+
+    --btn-cta-padding-vertical: 10px;
+    --btn-cta-padding-horizontal: 18px;
+
+    /* Other */
+    --btn-border-radius: 5px;
+    --btn-gap: 10px;
+}

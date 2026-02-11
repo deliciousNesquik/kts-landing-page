@@ -1,0 +1,13 @@
+/* Стилизация главного контейнера страницы */
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    width: 100%;
+    max-width: 1200px;
+
+    height: auto;
+    padding: 25px 20px;
+    margin: 0;
+}
