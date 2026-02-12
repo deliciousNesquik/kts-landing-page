@@ -16,20 +16,16 @@ const VANS_DATA = getVansData();
 export default function Vans() {
     const [view, setView] = useState("card");
     const [searchQuery, setSearchQuery] = useState("");
-    const [loading] = useState(false);
 
     // Обработчик клика по микроавтобусу (опционально)
     const handleVanClick = (vanData) => {
         console.log('Выбран микроавтобус:', vanData);
-        // Здесь можно добавить дополнительную логику
     };
 
-    // Фильтрация по поиску
+    // Фильтрация по поиску - ИСПРАВЛЕНО
     const filteredVans = VANS_DATA.filter(van => {
-        if (!searchQuery) return true;
-
-        const titleText = typeof van.title?.props?.text === 'string' ? van.title.props.text : '';
-        return titleText.toLowerCase().includes(searchQuery.toLowerCase());
+        if (!searchQuery.trim()) return true;
+        return van.title.toLowerCase().includes(searchQuery.toLowerCase());
     });
 
     const handleSearch = (query) => {
@@ -40,7 +36,6 @@ export default function Vans() {
         setView(newView);
     };
 
-
     return (
         <Content>
             <Heading level={1} text={"Модельный ряд"}></Heading>
@@ -50,8 +45,8 @@ export default function Vans() {
                     content={<Search
                         placeholder="Поиск микроавтобусов..."
                         onSearch={handleSearch}
-                        onChange={handleSearch}/>
-                    }
+                        onChange={handleSearch}
+                    />}
                 />
                 <div className="margin-15"/>
                 <Section
@@ -77,8 +72,7 @@ export default function Vans() {
             <VanView
                 vans={filteredVans}
                 view={view}
-                loading={loading}
-                onVanClick={handleVanClick} // Передаем обработчик
+                onVanClick={handleVanClick}
             />
         </Content>
     );
