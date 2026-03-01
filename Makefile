@@ -16,7 +16,7 @@ install: frontend-install backend-install database-install
 
 frontend-start:
 	cd frontend && nohup npm run build > logs/frontend-build.log 2>&1 && \
-	nohup npx serve -s build -l 3000 > logs/frontend.log 2>&1 </dev/null & \
+	nohup npx serve -s dist -l 3000 > logs/frontend.log 2>&1 </dev/null & \
 	echo $$! > .frontend.pid
 
 backend-start:
