@@ -8,7 +8,7 @@
     "start": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "prod": "serve -s dist"
+    "prod": "serve -s dist -l 3000"
   },
   "dependencies": {
     "motion": "^12.23.22",

@@ -1,6 +1,14 @@
-﻿.PHONY: frontend-install backend-install database-install install \
+﻿include .env
+export
+
+.PHONY: frontend-install backend-install database-install install \
         frontend-start backend-start frontend-stop backend-stop \
-        frontend-restart backend-restart frontend-logs backend-logs
+        frontend-restart backend-restart frontend-logs backend-logs \
+        db-migrate db-seed db-show
+
+
+DB_PATH ?= ./backend/database
+MIGRATION_DIR = ./database
 
 frontend-install:
 	cd frontend && npm install
@@ -13,14 +21,28 @@ database-install:
 
 install: frontend-install backend-install database-install
 
+db-show:
+	@echo "Содержимое notification_chats:"
+	@sqlite3 -header -column $(DB_PATH) "SELECT * FROM notification_chats;"
+
+db-seed:
+	@echo "Заполняю начальные данные..."
+	@envsubst < $(MIGRATION_DIR)/seed.sql.template | sqlite3 $(DB_PATH)
+	@echo "Данные добавлены"
+
+db-migrate:
+	@echo "Выполняю миграцию..."
+	@mkdir -p $(dir $(DB_PATH))
+	@sqlite3 $(DB_PATH) < $(MIGRATION_DIR)/migration.sql
+	@echo "Миграция выполнена: $(DB_PATH)"
 
 frontend-start:
-	cd frontend && nohup npm run build > logs/frontend-build.log 2>&1 && \
-	nohup npx serve -s dist -l 3000 > logs/frontend.log 2>&1 </dev/null & \
+	cd frontend && nohup npm run build > ../logs/frontend-build.log 2>&1 && \
+	nohup npm run prod > ../logs/frontend.log 2>&1 </dev/null & \
 	echo $$! > .frontend.pid
 
 backend-start:
-	cd backend && nohup npm run start > logs/backend.log 2>&1 </dev/null & \
+	cd backend && nohup npm run start > ../logs/backend.log 2>&1 </dev/null & \
 	echo $$! > .backend.pid
 
 
