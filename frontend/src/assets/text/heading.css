@@ -1,7 +1,8 @@
 .heading {
     font-weight: 700;
     transition: all 0.2s ease-in-out;
-    font-family: inherit;
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
     color: var(--color-text-primary);
 }
 

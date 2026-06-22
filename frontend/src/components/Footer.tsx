@@ -138,9 +138,9 @@ const Footer = () => {
                 </div>
 
                 <div className="footer-legal">
-                    <p className="footer-disclaimer">
+                    <div className="footer-disclaimer">
                         <Text level={"5-2"} weight={"inverse"} text={"Вся представленная на сайте информация, касающаяся автомобилей и сервисного обслуживания, носит информационный характер и не является публичной офертой, определяемой положениями ст. 437 (2) ГК РФ. Все цены, указанные на данном сайте, носят информационный характер."}></Text>
-                    </p>
+                    </div>
 
                     <div className="footer-links">
                         <a href="/privacy-policy" className="footer-link">

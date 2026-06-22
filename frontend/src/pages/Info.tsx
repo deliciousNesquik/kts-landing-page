@@ -3,143 +3,161 @@ import Icon from '../components/Icon';
 import { PrimaryCTA } from '../components/buttons';
 import '../assets/page/info.css';
 
+const METRICS = [
+  { value: '10+', unit: 'лет', label: 'в коммерческом ремонте' },
+  { value: '95', unit: '%', label: 'клиентов приходят повторно' },
+  { value: '7/7', unit: '', label: 'приём заявок каждый день' },
+  { value: '1', unit: 'день', label: 'частый срок типового ремонта' },
+];
+
 const PROMISES = [
   {
     icon: 'certificates',
+    tag: 'диагностика',
     title: 'Честная диагностика и смета',
-    text: 'Сначала показываем проблему и объясняем решение, затем фиксируем стоимость и только после согласования начинаем работы.',
+    text: 'Сначала показываем проблему и объясняем решение, фиксируем стоимость — и только после согласования начинаем работы.',
   },
   {
     icon: 'clock',
+    tag: 'сроки',
     title: 'Прогнозируемые сроки',
-    text: 'Понимаем, что простой транспорта = потери. Поэтому сразу даем реалистичный срок и держим вас в курсе статуса ремонта.',
+    text: 'Простой транспорта — это потери. Поэтому сразу даём реалистичный срок и держим вас в курсе статуса ремонта.',
   },
   {
     icon: 'smile',
+    tag: 'сервис',
     title: 'Сервис, который не подводит',
-    text: 'Говорим простым языком, отвечаем по делу и делаем так, чтобы после визита у вас не осталось вопросов по автомобилю.',
+    text: 'Говорим простым языком и делаем так, чтобы после визита у вас не осталось вопросов по автомобилю.',
   },
 ];
 
 const FLOW = [
   {
-    step: '01',
     title: 'Связываемся и уточняем задачу',
-    text: 'Вы оставляете заявку, мы уточняем симптомы, загрузку авто и подбираем удобное окно для приема.',
+    text: 'Вы оставляете заявку, мы уточняем симптомы и загрузку авто, подбираем удобное окно для приёма.',
   },
   {
-    step: '02',
     title: 'Проводим диагностику',
     text: 'Проверяем ключевые узлы, определяем точную причину неисправности и согласовываем план работ.',
   },
   {
-    step: '03',
     title: 'Возвращаем авто в работу',
-    text: 'После ремонта делаем контрольную проверку и выдаем рекомендации, чтобы снизить риск повторной поломки.',
+    text: 'После ремонта — контрольная проверка и рекомендации, чтобы снизить риск повторной поломки.',
   },
-];
-
-const METRICS = [
-  { value: '10+', label: 'лет в коммерческом ремонте' },
-  { value: '95%', label: 'клиентов приходят повторно' },
-  { value: '7/7', label: 'прием заявок каждый день' },
-  { value: '1 день', label: 'частый срок типового ремонта' },
 ];
 
 export default function Info() {
   return (
     <Content>
-      <section className="info-hero fade-in-up">
-        <div className="info-hero__main">
-          <span className="info-hero__badge">
-            <Icon name="stars" size={16} />
-            Экспертный сервис коммерческого транспорта
-          </span>
-
-          <h1 className="info-hero__title">Сервис, которому можно доверить рабочий транспорт без риска для бизнеса</h1>
-
-          <p className="info-hero__subtitle">
-            Мы ремонтируем микроавтобусы так, чтобы вы как можно быстрее вернулись в работу. Прозрачная коммуникация,
-            понятная смета и ответственность за результат на каждом этапе.
-          </p>
-
-          <div className="info-hero__actions">
-            <PrimaryCTA href="/appointments" icon={<Icon name="phone" />} text="Записаться на сервис" />
-            <PrimaryCTA href="/contacts" icon={<Icon name="map_picker" />} text="Посмотреть контакты" className="info-hero__ghost" />
+      <div className="info2">
+        {/* HERO с реальным фото цеха */}
+        <section className="ihero">
+          <div className="ihero__lead">
+            <p className="eyebrow">
+              <span className="eyebrow__mark" aria-hidden="true" />
+              О сервисе · Санкт-Петербург
+            </p>
+            <h1 className="ihero__title">
+              Сервис, которому доверяют<br />
+              <span className="accent">рабочий транспорт.</span>
+            </h1>
+            <p className="ihero__lede">
+              Ремонтируем микроавтобусы так, чтобы вы быстрее вернулись в работу. Прозрачная
+              коммуникация, понятная смета и ответственность за результат на каждом этапе.
+            </p>
+            <div className="ihero__actions">
+              <PrimaryCTA href="/appointments" icon={<Icon name="phone" />} text="Записаться на сервис" />
+              <a className="btn-ghost" href="/contacts">
+                <Icon name="map_picker" size={18} />
+                <span>Посмотреть контакты</span>
+              </a>
+            </div>
           </div>
-        </div>
 
-        <aside className="info-hero__aside">
-          <h2>Что вы получаете уже с первого обращения</h2>
-          <ul>
-            <li>
-              <Icon name="certificates" size={16} />
-              Понятный перечень работ без скрытых пунктов
-            </li>
-            <li>
-              <Icon name="clock" size={16} />
-              Согласованные сроки и статус ремонта по ходу работ
-            </li>
-            <li>
-              <Icon name="spanner" size={16} />
-              Решение причины поломки, а не временный компромисс
-            </li>
-          </ul>
-        </aside>
-      </section>
+          <figure className="ihero__photo">
+            <img src="/photos/service-bay.jpg" alt="Микроавтобус Ford Transit на подъёмнике в нашем цеху" loading="lazy" />
+            <figcaption>Наш цех · подъёмники под коммерческий транспорт</figcaption>
+          </figure>
+        </section>
 
-      <section className="info-metrics fade-in-up">
-        {METRICS.map((item) => (
-          <article key={item.label} className="info-metrics__item">
-            <strong>{item.value}</strong>
-            <p>{item.label}</p>
-          </article>
-        ))}
-      </section>
-
-      <section className="info-promises fade-in-up">
-        <header className="info-section-header">
-          <h2>Почему владельцы микроавтобусов выбирают нас</h2>
-          <p>Мы строим сервис вокруг вашей операционной задачи: минимальный простой и предсказуемый результат.</p>
-        </header>
-
-        <div className="info-promises__grid">
-          {PROMISES.map((item) => (
-            <article key={item.title} className="info-promises__card">
-              <div className="info-promises__icon">
-                <Icon name={item.icon} size={22} />
-              </div>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </article>
+        {/* МЕТРИКИ как приборные показания */}
+        <section className="istats">
+          {METRICS.map((m) => (
+            <div className="istat" key={m.label}>
+              <span className="istat__value">
+                {m.value}
+                {m.unit && <span className="istat__unit">{m.unit}</span>}
+              </span>
+              <span className="istat__label">{m.label}</span>
+            </div>
           ))}
-        </div>
-      </section>
+        </section>
 
-      <section className="info-flow fade-in-up">
-        <header className="info-section-header">
-          <h2>Как мы работаем</h2>
-          <p>Простой и удобный процесс без лишней бюрократии и непредсказуемых итогов.</p>
-        </header>
+        {/* ПОЧЕМУ ВЫБИРАЮТ */}
+        <section className="iblock">
+          <div className="iblock__head">
+            <h2 className="iblock__title">Почему владельцы микроавтобусов выбирают нас</h2>
+            <p className="iblock__sub">Сервис строится вокруг вашей задачи: минимальный простой и предсказуемый результат.</p>
+          </div>
+          <div className="iwhy">
+            {PROMISES.map((p) => (
+              <article className="iwhy__card" key={p.title}>
+                <div className="iwhy__icon"><Icon name={p.icon} size={22} /></div>
+                <span className="iwhy__tag">{p.tag}</span>
+                <h3 className="iwhy__title">{p.title}</h3>
+                <p className="iwhy__text">{p.text}</p>
+              </article>
+            ))}
+          </div>
+        </section>
 
-        <div className="info-flow__grid">
-          {FLOW.map((item) => (
-            <article key={item.step} className="info-flow__item">
-              <span className="info-flow__step">{item.step}</span>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </article>
-          ))}
-        </div>
-      </section>
+        {/* ГДЕ МЫ РАБОТАЕМ — фото базы и цеха */}
+        <section className="iblock">
+          <div className="iblock__head">
+            <h2 className="iblock__title">Где мы работаем</h2>
+            <p className="iblock__sub">
+              Просторный отапливаемый цех с подъёмниками под фургоны и микроавтобусы — место,
+              где вашим транспортом занимаются всерьёз.
+            </p>
+          </div>
+          <div className="ishop">
+            <figure className="ishop__photo ishop__photo--wide">
+              <img src="/photos/exterior.jpg" alt="Здание нашего сервиса снаружи" loading="lazy" />
+              <figcaption>Наша база</figcaption>
+            </figure>
+            <figure className="ishop__photo">
+              <img src="/photos/hall.jpg" alt="Цех с микроавтобусом на подъёмнике" loading="lazy" />
+              <figcaption>Ремонтный цех</figcaption>
+            </figure>
+          </div>
+        </section>
 
-      <section className="info-final-cta fade-in-up">
-        <div>
-          <h2>Оставьте заявку сейчас и получите план работ уже сегодня</h2>
-          <p>Мы свяжемся с вами, оценим задачу и предложим оптимальный маршрут ремонта под ваш микроавтобус.</p>
-        </div>
-        <PrimaryCTA href="/appointments" icon={<Icon name="phone" />} text="Оставить заявку" />
-      </section>
+        {/* КАК МЫ РАБОТАЕМ — последовательность */}
+        <section className="iblock">
+          <div className="iblock__head">
+            <h2 className="iblock__title">Как мы работаем</h2>
+            <p className="iblock__sub">Простой процесс без лишней бюрократии и непредсказуемых итогов.</p>
+          </div>
+          <ol className="iflow">
+            {FLOW.map((s, i) => (
+              <li className="istep" key={s.title}>
+                <span className="istep__num">{String(i + 1).padStart(2, '0')}</span>
+                <h3 className="istep__title">{s.title}</h3>
+                <p className="istep__text">{s.text}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        {/* ФИНАЛЬНЫЙ CTA */}
+        <section className="icta">
+          <div className="icta__text">
+            <h2 className="icta__title">Оставьте заявку — и получите план работ уже сегодня.</h2>
+            <p className="icta__sub">Свяжемся, оценим задачу и предложим оптимальный маршрут ремонта под ваш микроавтобус.</p>
+          </div>
+          <PrimaryCTA href="/appointments" icon={<Icon name="phone" />} text="Оставить заявку" />
+        </section>
+      </div>
     </Content>
   );
 }

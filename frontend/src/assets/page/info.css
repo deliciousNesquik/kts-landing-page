@@ -1,293 +1,409 @@
-.info-hero,
-.info-metrics,
-.info-promises,
-.info-flow,
-.info-final-cta {
+/* ============================================================
+   Страница /info — «О сервисе». Дизайн-система + реальные фото цеха.
+   Скоупится под .info2.
+   ============================================================ */
+
+.info2 {
   width: 100%;
 }
 
-.info-hero {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 22px;
-  padding: 20px;
-  border-radius: 28px;
-  background:
-    radial-gradient(circle at 82% 14%, rgba(233, 21, 45, 0.2), transparent 38%),
-    radial-gradient(circle at 14% 84%, rgba(72, 117, 255, 0.12), transparent 40%),
-    linear-gradient(155deg, var(--color-surface-primary) 0%, color-mix(in srgb, var(--color-surface-primary) 88%, #ffffff 12%) 100%);
-  border: 1px solid color-mix(in srgb, var(--color-surface-secondary) 78%, #ffffff 22%);
+/* общие примитивы (в стиле главной) */
+.info2 .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
 }
 
-.info-hero__main {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+.info2 .eyebrow__mark {
+  width: 3px;
+  height: 14px;
+  border-radius: 2px;
+  background: var(--color-accent);
 }
 
-.info-hero__badge {
+.info2 .btn-ghost {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  width: fit-content;
-  padding: 8px 14px;
-  border-radius: 999px;
-  font: 600 13px/1.2 'SF Pro Rounded', system-ui;
-  background: color-mix(in srgb, var(--color-accent) 15%, white 85%);
-  color: color-mix(in srgb, var(--color-accent) 76%, #111 24%);
-  border: 1px solid color-mix(in srgb, var(--color-accent) 35%, white 65%);
-}
-
-.info-hero__title {
-  margin: 0;
+  min-height: 54px;
+  padding: 0 20px;
+  border-radius: 10px;
+  border: 1px solid var(--color-surface-secondary);
+  background: transparent;
   color: var(--color-text-primary);
-  font: 800 clamp(30px, 5vw, 52px) / 1.06 'SF Pro Rounded', system-ui;
-  max-width: 17ch;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 0.18s ease, background 0.18s ease;
 }
 
-.info-hero__subtitle {
-  margin: 0;
-  color: color-mix(in srgb, var(--color-text-secondary) 90%, #111 10%);
-  font: 500 17px/1.55 'SF Pro Rounded', system-ui;
-  max-width: 62ch;
+.info2 .btn-ghost:hover {
+  border-color: var(--color-text-primary);
+  background: color-mix(in srgb, var(--color-text-primary) 5%, transparent);
 }
 
-.info-hero__actions {
+.info2 .btn-ghost:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* --- HERO --- */
+
+.ihero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(28px, 4vw, 52px);
+  align-items: center;
+  padding-top: 8px;
+}
+
+.ihero__title {
+  margin: 20px 0 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(34px, 5.4vw, 60px);
+  line-height: 1.0;
+  letter-spacing: -0.015em;
+  color: var(--color-text-primary);
+}
+
+.ihero__title .accent {
+  color: var(--color-accent);
+}
+
+.ihero__lede {
+  margin: 20px 0 0;
+  max-width: 48ch;
+  font-size: 17.5px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.ihero__actions {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 12px;
-  margin-top: 4px;
+  margin-top: 28px;
 }
 
-.info-hero__actions .primary-cta {
+.ihero__actions .primary-cta {
   min-height: 54px;
 }
 
-.info-hero__ghost {
-  background: transparent;
-  color: var(--color-text-primary);
-  border: 1px solid var(--color-surface-secondary);
-}
-
-.info-hero__aside {
-  padding: 18px;
-  border-radius: 20px;
-  border: 1px solid color-mix(in srgb, var(--color-surface-secondary) 75%, white 25%);
-  background: color-mix(in srgb, var(--color-canvas-primary) 70%, var(--color-surface-primary) 30%);
-}
-
-.info-hero__aside h2 {
-  margin: 0 0 10px;
-  color: var(--color-text-primary);
-  font: 700 22px/1.2 'SF Pro Rounded', system-ui;
-}
-
-.info-hero__aside ul {
-  list-style: none;
+/* фото с подписью */
+.ihero__photo,
+.ishop__photo {
+  position: relative;
   margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--color-surface-secondary);
+  background: var(--color-surface-secondary);
 }
 
-.info-hero__aside li {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  color: var(--color-text-primary);
-  font: 500 14px/1.45 'SF Pro Rounded', system-ui;
+.ihero__photo {
+  aspect-ratio: 4 / 3;
 }
 
-.info-hero__aside li svg {
-  margin-top: 2px;
-  color: var(--color-accent);
-  flex-shrink: 0;
+.ihero__photo img,
+.ishop__photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.info-metrics {
-  margin-top: 20px;
+.ihero__photo figcaption,
+.ishop__photo figcaption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 26px 16px 12px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: linear-gradient(to top, rgba(10, 11, 14, 0.78), transparent);
+}
+
+/* --- МЕТРИКИ (приборные показания) --- */
+
+.istats {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.info-metrics__item {
-  padding: 14px;
-  border-radius: 16px;
+  gap: 0;
+  margin-top: clamp(32px, 5vw, 56px);
+  border: 1px solid var(--color-surface-secondary);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
   background: var(--color-surface-primary);
-  border: 1px solid color-mix(in srgb, var(--color-surface-secondary) 78%, white 22%);
 }
 
-.info-metrics__item strong {
+.istat {
+  padding: 22px 20px;
+  border-left: 1px solid var(--color-surface-secondary);
+}
+
+.istat:first-child {
+  border-left: none;
+}
+
+.istat__value {
   display: block;
-  color: var(--color-accent);
-  font: 800 25px/1 'SF Pro Rounded', system-ui;
-}
-
-.info-metrics__item p {
-  margin: 6px 0 0;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 34px;
+  line-height: 1;
   color: var(--color-text-primary);
-  font: 500 13px/1.35 'SF Pro Rounded', system-ui;
+  font-variant-numeric: tabular-nums;
 }
 
-.info-promises,
-.info-flow {
-  margin-top: 34px;
+.istat__unit {
+  margin-left: 5px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
 }
 
-.info-section-header {
-  margin-bottom: 14px;
+.istat__label {
+  display: block;
+  margin-top: 8px;
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: var(--color-text-secondary);
 }
 
-.info-section-header h2 {
+/* --- общий блок --- */
+
+.iblock {
+  margin-top: clamp(48px, 7vw, 84px);
+}
+
+.iblock__head {
+  margin-bottom: 28px;
+}
+
+.iblock__title {
   margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(26px, 3.6vw, 40px);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
   color: var(--color-text-primary);
-  font: 800 clamp(24px, 3.8vw, 38px) / 1.12 'SF Pro Rounded', system-ui;
 }
 
-.info-section-header p {
-  margin: 8px 0 0;
-  color: color-mix(in srgb, var(--color-text-secondary) 88%, #111 12%);
-  font: 500 16px/1.5 'SF Pro Rounded', system-ui;
-  max-width: 75ch;
+.iblock__sub {
+  margin: 10px 0 0;
+  max-width: 64ch;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--color-text-secondary);
 }
 
-.info-promises__grid,
-.info-flow__grid {
+/* --- ПОЧЕМУ ВЫБИРАЮТ --- */
+
+.iwhy {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
+  gap: 16px;
 }
 
-.info-promises__card,
-.info-flow__item {
-  border-radius: 20px;
-  padding: 16px;
+.iwhy__card {
+  padding: 24px;
   background: var(--color-surface-primary);
-  border: 1px solid color-mix(in srgb, var(--color-surface-secondary) 76%, #fff 24%);
+  border: 1px solid var(--color-surface-secondary);
+  border-radius: var(--radius);
+  transition: border-color 0.18s ease, transform 0.18s ease;
 }
 
-.info-promises__icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
+.iwhy__card:hover {
+  border-color: color-mix(in srgb, var(--color-accent) 45%, var(--color-surface-secondary));
+  transform: translateY(-3px);
+}
+
+.iwhy__icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--color-accent) 12%, var(--color-surface-primary));
   color: var(--color-accent);
-  background: color-mix(in srgb, var(--color-accent) 14%, white 86%);
 }
 
-.info-promises__card h3,
-.info-flow__item h3 {
-  margin: 10px 0 8px;
+.iwhy__tag {
+  display: block;
+  margin-top: 16px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.iwhy__title {
+  margin: 6px 0 8px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.25;
   color: var(--color-text-primary);
-  font: 700 21px/1.2 'SF Pro Rounded', system-ui;
 }
 
-.info-promises__card p,
-.info-flow__item p {
+.iwhy__text {
   margin: 0;
-  color: color-mix(in srgb, var(--color-text-secondary) 90%, #111 10%);
-  font: 500 14px/1.45 'SF Pro Rounded', system-ui;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--color-text-secondary);
 }
 
-.info-flow__step {
-  display: inline-flex;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  align-items: center;
-  justify-content: center;
-  background: var(--color-accent);
-  color: var(--color-text-inverse);
-  font: 700 14px/1 'SF Pro Rounded', system-ui;
+/* --- ГДЕ МЫ РАБОТАЕМ --- */
+
+.ishop {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 16px;
 }
 
-.info-final-cta {
-  margin-top: 30px;
-  border-radius: 24px;
-  padding: 20px;
+.ishop__photo {
+  aspect-ratio: 16 / 11;
+}
+
+/* --- КАК МЫ РАБОТАЕМ --- */
+
+.iflow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.istep {
+  padding: 20px 4px 4px;
+  border-top: 2px solid var(--color-text-primary);
+}
+
+.istep__num {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 26px;
+  color: var(--color-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.istep__title {
+  margin: 10px 0 6px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 19px;
+  line-height: 1.25;
+  color: var(--color-text-primary);
+}
+
+.istep__text {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--color-text-secondary);
+}
+
+/* --- ФИНАЛЬНЫЙ CTA --- */
+
+.icta {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
-  color: var(--color-text-inverse);
-  background:
-    radial-gradient(circle at 86% 12%, rgba(233, 21, 45, 0.24), transparent 35%),
-    linear-gradient(140deg, var(--color-canvas-secondary) 0%, color-mix(in srgb, var(--color-canvas-secondary) 88%, #121316 12%) 100%);
+  gap: 24px;
+  margin-top: clamp(48px, 7vw, 84px);
+  padding: clamp(28px, 4vw, 48px);
+  background: var(--color-canvas-secondary);
+  border-radius: var(--radius-lg);
 }
 
-.info-final-cta h2 {
+.icta__title {
   margin: 0;
-  font: 800 clamp(24px, 3.2vw, 36px) / 1.12 'SF Pro Rounded', system-ui;
-  max-width: 19ch;
+  max-width: 22ch;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(24px, 3vw, 38px);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: #fff;
 }
 
-.info-final-cta p {
-  margin: 8px 0 0;
-  color: color-mix(in srgb, var(--color-text-inverse) 80%, #9aa2b2 20%);
-  font: 500 15px/1.5 'SF Pro Rounded', system-ui;
-  max-width: 62ch;
+.icta__sub {
+  margin: 12px 0 0;
+  max-width: 52ch;
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: #9aa1ae;
 }
 
-.info-final-cta .primary-cta {
-  min-width: 220px;
+.icta .primary-cta {
+  min-height: 56px;
+  min-width: 210px;
+  flex-shrink: 0;
 }
 
-.fade-in-up {
-  animation: info-fade-in-up 0.55s ease both;
-}
+/* --- адаптив --- */
 
-@keyframes info-fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (max-width: 1100px) {
-  .info-hero {
+@media (max-width: 900px) {
+  .ihero {
     grid-template-columns: 1fr;
   }
-
-  .info-metrics {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .info-promises__grid,
-  .info-flow__grid {
+  .iwhy,
+  .iflow {
     grid-template-columns: 1fr;
+  }
+  .istats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .istat:nth-child(3) {
+    border-left: none;
+  }
+  .istat:nth-child(n + 3) {
+    border-top: 1px solid var(--color-surface-secondary);
+  }
+  .ishop {
+    grid-template-columns: 1fr;
+  }
+  .istep {
+    border-top-width: 1px;
   }
 }
 
-@media (max-width: 700px) {
-  .info-hero,
-  .info-final-cta {
-    padding: 16px;
-    border-radius: 18px;
+@media (max-width: 520px) {
+  .istats {
+    grid-template-columns: 1fr;
   }
-
-  .info-hero__subtitle {
-    font-size: 16px;
+  .istat {
+    border-left: none;
+    border-top: 1px solid var(--color-surface-secondary);
   }
-
-  .info-hero__actions {
-    flex-direction: column;
+  .istat:first-child {
+    border-top: none;
   }
-
-  .info-hero__actions .primary-cta,
-  .info-final-cta .primary-cta {
+  .ihero__actions .primary-cta,
+  .info2 .btn-ghost {
     width: 100%;
+    justify-content: center;
   }
-
-  .info-metrics {
-    grid-template-columns: 1fr;
+  .icta .primary-cta {
+    width: 100%;
   }
 }

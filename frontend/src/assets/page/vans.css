@@ -1,54 +1,191 @@
-.search-layout {
-    display: flex;
-    flex-direction: column;
+/* ============================================================
+   Страница /vans — «модельный ряд, который мы обслуживаем».
+   Скоупится под .vans2.
+   ============================================================ */
+
+.vans2 {
+  width: 100%;
+}
+
+/* --- Вступление --- */
+
+.vans-intro {
+  width: 100%;
+  max-width: 760px;
+  padding-top: 4px;
+}
+
+.vans2 .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.vans2 .eyebrow__mark {
+  width: 3px;
+  height: 14px;
+  border-radius: 2px;
+  background: var(--color-accent);
+}
+
+.vans-intro__title {
+  margin: 18px 0 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(30px, 5vw, 52px);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  color: var(--color-text-primary);
+}
+
+.vans-intro__lede {
+  margin: 16px 0 0;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.vans-intro__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 20px;
+}
+
+.legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--color-text-secondary);
+}
+
+.legend__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.legend__dot--go {
+  background: #18a957;
+  box-shadow: 0 0 0 3px color-mix(in srgb, #18a957 22%, transparent);
+}
+
+.legend__dot--wait {
+  background: #e0a100;
+  box-shadow: 0 0 0 3px color-mix(in srgb, #e0a100 22%, transparent);
+}
+
+/* --- Панель управления --- */
+
+.vans-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-top: clamp(28px, 4vw, 44px);
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-surface-secondary);
+}
+
+.vans-bar__search {
+  flex: 1 1 280px;
+}
+
+.vans-bar__view {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.vans-bar__view-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  margin-right: 2px;
+}
+
+/* кнопки вида — компактнее, чем CTA */
+.vans-bar__view .toggle-button {
+  padding: 9px 14px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  gap: 8px;
+}
+
+.vans-bar__view .toggle-button__text {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.vans-bar__view .toggle-button__icon,
+.vans-bar__view .toggle-button svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* --- Счётчик --- */
+
+.vans-count {
+  margin: 18px 0 22px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--color-text-secondary);
+}
+
+.vans-count strong {
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+/* --- Пустое состояние --- */
+
+.vans-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  max-width: 460px;
+  margin: 48px auto;
+  padding: 40px 24px;
+  border: 1px dashed var(--color-surface-secondary);
+  border-radius: var(--radius-lg);
+  color: var(--color-text-secondary);
+}
+
+.vans-empty svg {
+  color: var(--color-accent);
+}
+
+.vans-empty__title {
+  margin: 4px 0 0;
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--color-text-primary);
+}
+
+.vans-empty__text {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.55;
+}
+
+@media (max-width: 640px) {
+  .vans-bar__view {
     width: 100%;
-}
-
-@media (min-width: 768px) {
-    .search-layout {
-        flex-direction: column;
-    }
-}
-
-@media (min-width: 1024px) {
-    .search-layout {
-        flex-direction: row;
-    }
-}
-@media (min-width: 1440px) {
-    .search-layout {
-        flex-direction: row;
-    }
-}
-
-/* assets/page/vans.css */
-.vans-controls {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 40px;
-    align-items: start;
-    margin: 32px 0;
-    max-width: 1200px;
-}
-
-.vans-results {
-    margin: 24px 0;
-    max-width: 1200px;
-}
-
-.view-toggle {
-    display: flex;
-    gap: 12px;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .vans-controls {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .view-toggle {
-        justify-content: center;
-    }
+    justify-content: space-between;
+  }
 }

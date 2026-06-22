@@ -1,13 +1,16 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--font-body, 'IBM Plex Sans', system-ui, sans-serif);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: var(--font-mono, 'IBM Plex Mono', ui-monospace, monospace);
+}
+
+/* Все заголовки сайта — дисплейный (узкий) шрифт, как на главной */
+h1, h2, h3, h4 {
+  font-family: var(--font-display, 'IBM Plex Sans Condensed', system-ui, sans-serif);
+  letter-spacing: -0.01em;
 }

@@ -45,11 +45,11 @@
 /* Планшет (768px и выше) */
 @media (min-width: 768px) {
     .toggle-button__icon {
-        width: 20px;
-        height: 20px;
+        width: 18px;
+        height: 18px;
     }
     .toggle-button__text {
-        font-size: 20px;
+        font-size: 16px;
         font-weight: 700;
     }
 }
@@ -57,11 +57,11 @@
 /* Десктоп (1024px и выше) */
 @media (min-width: 1024px) {
     .toggle-button__icon {
-        width: 24px;
-        height: 24px;
+        width: 18px;
+        height: 18px;
     }
     .toggle-button__text {
-        font-size: 24px;
+        font-size: 16px;
         font-weight: 700;
     }
 }
@@ -69,11 +69,11 @@
 /* Большие экраны (1440px и выше) */
 @media (min-width: 1440px) {
     .toggle-button__icon {
-        width: 24px;
-        height: 24px;
+        width: 18px;
+        height: 18px;
     }
     .toggle-button__text {
-        font-size: 24px;
+        font-size: 16px;
         font-weight: 700;
     }
 }

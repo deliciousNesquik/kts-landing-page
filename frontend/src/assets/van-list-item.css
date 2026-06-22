@@ -1,108 +1,172 @@
+/* ============================================================
+   Строка списка моделей — «сервисный реестр».
+   Левая цветная грань кодирует статус обслуживания (реальная инфа).
+   ============================================================ */
+
 .van-list-item {
+  --go: #18a957;
+  --wait: #e0a100;
+
+  position: relative;
   width: 100%;
-  border-radius: 22px;
-  border: 1px solid color-mix(in srgb, var(--color-surface-secondary) 80%, #ffffff 20%);
-  background: linear-gradient(120deg, var(--color-surface-primary) 0%, color-mix(in srgb, var(--color-surface-primary) 90%, #f7f9fc 10%) 100%);
-  box-shadow: 0 12px 34px rgba(6, 21, 43, 0.08);
-  padding: 14px;
   display: grid;
-  grid-template-columns: 210px 1fr;
-  gap: 16px;
-  align-items: stretch;
-  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  grid-template-columns: 196px 1fr;
+  gap: 22px;
+  padding: 16px 20px 16px 16px;
+  background: var(--color-surface-primary);
+  border: 1px solid var(--color-surface-secondary);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* статусная грань слева: зелёная — регулярно, янтарная — по записи */
+.van-list-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--go);
+}
+
+.van-list-item.is-wait::before {
+  background: var(--wait);
 }
 
 .van-list-item:hover {
+  border-color: color-mix(in srgb, var(--color-accent) 45%, var(--color-surface-secondary));
   transform: translateY(-2px);
-  box-shadow: 0 16px 36px rgba(6, 21, 43, 0.12);
+  box-shadow: 0 14px 32px -22px rgba(20, 22, 27, 0.55);
 }
 
+/* --- превью --- */
+
 .van-list-item__thumb-wrap {
-  border-radius: 16px;
-  padding: 10px;
+  border-radius: var(--radius);
+  padding: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   background:
-    radial-gradient(circle at 75% 20%, rgba(233, 21, 45, 0.2), transparent 45%),
-    radial-gradient(circle at 20% 80%, rgba(57, 104, 255, 0.14), transparent 45%),
-    var(--color-surface-secondary);
+    radial-gradient(circle at 78% 18%, rgba(225, 17, 43, 0.08), transparent 55%),
+    color-mix(in srgb, var(--color-surface-secondary) 55%, var(--color-surface-primary));
+  border: 1px solid color-mix(in srgb, var(--color-surface-secondary) 70%, transparent);
 }
 
 .van-list-item__thumb {
   width: 100%;
-  max-width: 188px;
+  max-width: 180px;
   object-fit: contain;
-  filter: drop-shadow(0 8px 12px rgba(16, 24, 40, 0.14));
+  filter: drop-shadow(0 8px 14px rgba(16, 24, 40, 0.18));
 }
+
+/* --- контент --- */
 
 .van-list-item__content {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
+  min-width: 0;
 }
 
 .van-list-item__top {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 10px;
+  gap: 14px;
 }
 
 .van-list-item__title {
   margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
   color: var(--color-text-primary);
-  font: 700 26px/1.18 'SF Pro Rounded', system-ui;
 }
 
 .van-list-item__class {
-  margin: 2px 0 0;
+  margin: 5px 0 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--color-text-secondary);
-  font: 600 13px/1.2 'SF Pro Rounded', system-ui;
 }
 
 .van-list-item__status {
   flex-shrink: 0;
   display: inline-flex;
-  padding: 6px 12px;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 13px;
   border-radius: 999px;
-  font: 700 12px/1.2 'SF Pro Rounded', system-ui;
-  border: 1px solid color-mix(in srgb, var(--color-accent) 35%, white 65%);
-  background: color-mix(in srgb, var(--color-accent) 15%, white 85%);
-  color: color-mix(in srgb, var(--color-accent) 75%, #121212 25%);
+  border: 1px solid var(--color-surface-secondary);
+  background: var(--color-canvas-primary);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+.van-list-item__status .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--go);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--go) 22%, transparent);
+}
+
+.van-list-item.is-wait .van-list-item__status .dot {
+  background: var(--wait);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--wait) 22%, transparent);
 }
 
 .van-list-item__description {
   margin: 0;
-  color: color-mix(in srgb, var(--color-text-secondary) 88%, #111 12%);
-  font: 500 14px/1.5 'SF Pro Rounded', system-ui;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--color-text-secondary);
+  max-width: 70ch;
 }
 
 .van-list-item__chips {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  margin-top: 2px;
 }
 
 .van-list-item__chip {
   display: inline-flex;
   align-items: center;
-  padding: 7px 10px;
-  border-radius: 12px;
-  background: color-mix(in srgb, var(--color-surface-secondary) 88%, #ffffff 12%);
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: var(--color-canvas-primary);
   color: var(--color-text-primary);
-  border: 1px solid color-mix(in srgb, var(--color-surface-secondary) 70%, #ccd5e3 30%);
-  font: 600 12px/1.2 'SF Pro Rounded', system-ui;
+  border: 1px solid var(--color-surface-secondary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
+/* --- скелетон загрузки --- */
+
 .van-list-item--loading {
-  grid-template-columns: 210px 1fr;
+  grid-template-columns: 196px 1fr;
 }
 
 .van-list-item__thumb-skeleton,
 .van-list-item__line-skeleton {
-  border-radius: 12px;
-  background: linear-gradient(90deg, #edf1f6 0%, #f7f9fc 45%, #edf1f6 100%);
+  border-radius: var(--radius);
+  background: linear-gradient(90deg, var(--color-surface-secondary) 0%, var(--color-surface-primary) 45%, var(--color-surface-secondary) 100%);
   background-size: 260% 100%;
   animation: van-list-skeleton 1.2s ease-in-out infinite;
 }
@@ -128,33 +192,27 @@
 }
 
 @keyframes van-list-skeleton {
-  0% {
-    background-position: 100% 0;
-  }
-  100% {
-    background-position: -100% 0;
-  }
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
 }
 
 @media (max-width: 980px) {
   .van-list-item {
-    grid-template-columns: 180px 1fr;
+    grid-template-columns: 156px 1fr;
+    gap: 16px;
   }
-
   .van-list-item__title {
     font-size: 22px;
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 640px) {
   .van-list-item {
     grid-template-columns: 1fr;
   }
-
   .van-list-item__thumb-wrap {
-    min-height: 138px;
+    min-height: 150px;
   }
-
   .van-list-item__top {
     flex-direction: column;
     align-items: flex-start;

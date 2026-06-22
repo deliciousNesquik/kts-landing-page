@@ -1,10 +1,7 @@
-import { useState, type ChangeEvent, type FormEvent, type CSSProperties } from 'react';
-import Heading from '../components/texts/Heading';
-import InfoBlock from '../components/InfoBlock';
+import { useState, type ChangeEvent, type FormEvent } from 'react';
 import Icon from '../components/Icon';
-import Text from '../components/texts/Text';
 import Content from '../components/Content';
-import { PrimaryCTA } from '../components/buttons/index';
+import '../assets/page/appointments.css';
 
 interface FormData {
   name: string;
@@ -17,31 +14,22 @@ interface ApiResponse {
   message: string;
 }
 
+type Status = 'idle' | 'sending' | 'ok' | 'error';
+
 export default function Appointments() {
-  const [formData, setFormData] = useState<FormData>({
-    name: '',
-    phone: '',
-    problem: '',
-  });
+  const [formData, setFormData] = useState<FormData>({ name: '', phone: '', problem: '' });
+  const [status, setStatus] = useState<Status>('idle');
+  const [feedback, setFeedback] = useState('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    const submitButton = e.currentTarget.querySelector('button[type="submit"]') as HTMLButtonElement | null;
-    const originalText = submitButton?.textContent;
-
-    if (submitButton) {
-      submitButton.textContent = 'Отправка...';
-      submitButton.disabled = true;
-    }
+    setStatus('sending');
+    setFeedback('');
 
     try {
       const response = await fetch('/api/send-request', {
@@ -49,182 +37,117 @@ export default function Appointments() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
-
       const result = (await response.json()) as ApiResponse;
 
       if (result.success) {
-        alert(result.message);
-        setFormData({
-          name: '',
-          phone: '',
-          problem: '',
-        });
+        setStatus('ok');
+        setFeedback(result.message || 'Заявка отправлена! Мы скоро вам перезвоним.');
+        setFormData({ name: '', phone: '', problem: '' });
       } else {
-        alert(`Ошибка: ${result.message}`);
+        setStatus('error');
+        setFeedback(result.message || 'Не удалось отправить заявку. Попробуйте ещё раз.');
       }
     } catch (error) {
       console.error('Ошибка:', error);
-      alert('Ошибка сети. Попробуйте еще раз.');
-    } finally {
-      if (submitButton && typeof originalText === 'string') {
-        submitButton.textContent = originalText;
-        submitButton.disabled = false;
-      }
+      setStatus('error');
+      setFeedback('Ошибка сети. Попробуйте ещё раз или позвоните нам.');
     }
   };
 
+  const sending = status === 'sending';
+
   return (
     <Content>
-      <Heading level={1} text="Обратный звонок" />
+      <div className="appt2">
+        <div className="appt-grid">
+          {/* Левая колонка: зачем и что будет дальше */}
+          <aside className="appt-intro">
+            <p className="eyebrow">
+              <span className="eyebrow__mark" aria-hidden="true" />
+              Запись · обратный звонок
+            </p>
+            <h1 className="appt-intro__title">
+              Запишитесь<br />
+              <span className="accent">на сервис.</span>
+            </h1>
+            <p className="appt-intro__lede">
+              Оставьте номер — перезвоним в течение рабочего дня, уточним симптомы и согласуем
+              удобное время. Хранить заявки и спамить не будем.
+            </p>
 
-      <div style={{ width: '100%', height: '15px' }} />
+            <ol className="appt-steps">
+              <li><span className="appt-steps__dot" aria-hidden="true" />Перезвоним в течение рабочего дня</li>
+              <li><span className="appt-steps__dot" aria-hidden="true" />Уточним симптомы и подберём время</li>
+              <li><span className="appt-steps__dot" aria-hidden="true" />Назовём план ремонта и срок</li>
+            </ol>
+          </aside>
 
-      <InfoBlock
-        icon={<Icon name="clock" />}
-        title={<Text level="2-1" text="Перезвоним сами!" />}
-        description={
-          <Text
-            weight="other"
-            level="4-1"
-            text="Заполните форму для обратного звонка ниже, указав свое имя, номер телефона на который поступит звонок. По возможности опишите проблему, чтобы мы помогли Вам быстрее."
-          />
-        }
-      />
+          {/* Правая колонка: форма */}
+          <div className="appt-card">
+            <form onSubmit={handleSubmit} noValidate>
+              <div className="appt-field">
+                <label htmlFor="name">Ваше имя <span className="req">*</span></label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  placeholder="Как к вам обращаться"
+                  autoComplete="name"
+                />
+              </div>
 
-      <div style={{ width: '100%', height: '15px' }} />
+              <div className="appt-field">
+                <label htmlFor="phone">Номер телефона <span className="req">*</span></label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                  placeholder="+7 (___) ___-__-__"
+                  autoComplete="tel"
+                />
+              </div>
 
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <div style={styles.inputGroup}>
-          <label htmlFor="name" style={styles.label}>
-            <Text level="3-1" text="Ваше имя*" weight="medium" />
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            style={styles.input}
-            placeholder="Введите ваше имя"
-          />
+              <div className="appt-field">
+                <label htmlFor="problem">Что случилось <span className="appt-field__opt">— необязательно</span></label>
+                <textarea
+                  id="problem"
+                  name="problem"
+                  value={formData.problem}
+                  onChange={handleChange}
+                  rows={4}
+                  placeholder="Коротко опишите проблему — так мы поможем быстрее"
+                />
+              </div>
+
+              <button type="submit" className="appt-submit" disabled={sending}>
+                <Icon name="phone" size={18} />
+                <span>{sending ? 'Отправляем…' : 'Записаться на сервис'}</span>
+              </button>
+
+              {status === 'ok' && (
+                <p className="appt-msg appt-msg--ok" role="status">
+                  <Icon name="smile" size={18} />
+                  <span>{feedback}</span>
+                </p>
+              )}
+              {status === 'error' && (
+                <p className="appt-msg appt-msg--error" role="alert">
+                  <Icon name="info" size={18} />
+                  <span>{feedback}</span>
+                </p>
+              )}
+
+              <p className="appt-note">Нажимая кнопку, вы соглашаетесь на обработку контактных данных для обратной связи.</p>
+            </form>
+          </div>
         </div>
-
-        <div style={{ width: '100%', height: '10px' }} />
-
-        <div style={styles.inputGroup}>
-          <label htmlFor="phone" style={styles.label}>
-            <Text level="3-1" text="Номер телефона*" weight="medium" />
-          </label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            required
-            style={styles.input}
-            placeholder="+7 (XXX) XXX-XX-XX"
-          />
-        </div>
-
-        <div style={{ width: '100%', height: '10px' }} />
-
-        <div style={styles.inputGroup}>
-          <label htmlFor="problem" style={styles.label}>
-            <Text level="3-1" text="Описание проблемы" weight="medium" />
-          </label>
-          <textarea
-            id="problem"
-            name="problem"
-            value={formData.problem}
-            onChange={handleChange}
-            style={styles.textarea}
-            placeholder="Опишите вашу проблему подробнее..."
-            rows={4}
-          />
-        </div>
-
-        <div style={{ width: '100%', height: '20px' }} />
-
-        <PrimaryCTA type="submit" icon={<Icon name="phone" />} text="Записаться на сервис" className="filled" />
-      </form>
+      </div>
     </Content>
-  );
-}
-
-const styles: Record<string, CSSProperties> = {
-  form: {
-    width: '100%',
-    maxWidth: '1200px',
-    margin: '0 auto',
-  },
-  inputGroup: {
-    width: '100%',
-    textAlign: 'left',
-  },
-  label: {
-    display: 'block',
-    marginBottom: '8px',
-    color: 'var(--color-text-primary)',
-  },
-  input: {
-    width: '100%',
-    padding: '12px 16px',
-    border: '2px solid var(--color-surface-secondary)',
-    borderRadius: '8px',
-    backgroundColor: 'var(--color-surface-primary)',
-    color: 'var(--color-text-primary)',
-    fontSize: '16px',
-    fontFamily: 'inherit',
-    transition: 'all 0.3s ease',
-    boxSizing: 'border-box',
-  },
-  textarea: {
-    width: '100%',
-    padding: '12px 16px',
-    border: '2px solid var(--color-surface-secondary)',
-    borderRadius: '8px',
-    backgroundColor: 'var(--color-surface-primary)',
-    color: 'var(--color-text-primary)',
-    fontSize: '16px',
-    fontFamily: 'inherit',
-    transition: 'all 0.3s ease',
-    resize: 'vertical',
-    minHeight: '100px',
-    boxSizing: 'border-box',
-  },
-};
-
-const styleSheet = document.styleSheets[0];
-if (styleSheet) {
-  styleSheet.insertRule(
-    `
-    input:focus, textarea:focus {
-      outline: none;
-      border-color: var(--color-accent);
-      box-shadow: 0 0 0 3px rgba(233, 21, 45, 0.1);
-    }
-  `,
-    styleSheet.cssRules.length,
-  );
-
-  styleSheet.insertRule(
-    `
-    button:hover {
-      background-color: #c51225;
-      transform: translateY(-1px);
-    }
-  `,
-    styleSheet.cssRules.length,
-  );
-
-  styleSheet.insertRule(
-    `
-    button:active {
-      transform: translateY(0);
-    }
-  `,
-    styleSheet.cssRules.length,
   );
 }

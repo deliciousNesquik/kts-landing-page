@@ -13,3 +13,7 @@
 # PID-файлы старого nohup-запуска
 .frontend.pid
 .backend.pid
+
+# Артефакты компиляции vite.config.ts (tsc -b)
+frontend/vite.config.js
+frontend/vite.config.d.ts

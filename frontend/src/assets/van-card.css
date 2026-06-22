@@ -1,7 +1,7 @@
 .van-card {
   width: min(100%, 360px);
   min-height: 420px;
-  border-radius: 24px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--color-surface-secondary) 80%, #ffffff 20%);
   background: linear-gradient(160deg, var(--color-surface-primary) 0%, color-mix(in srgb, var(--color-surface-primary) 85%, #f7f9fc 15%) 100%);
@@ -26,7 +26,7 @@
   padding: 18px;
   background:
     radial-gradient(circle at 85% 18%, rgba(233, 21, 45, 0.2), transparent 45%),
-    radial-gradient(circle at 16% 82%, rgba(57, 104, 255, 0.14), transparent 45%),
+    radial-gradient(circle at 16% 82%, rgba(225, 17, 43, 0.05), transparent 45%),
     linear-gradient(180deg, color-mix(in srgb, var(--color-surface-secondary) 94%, #ffffff 6%) 0%, var(--color-surface-secondary) 100%);
 }
 
@@ -48,7 +48,7 @@
   border-radius: 999px;
   background: color-mix(in srgb, var(--color-accent) 16%, white 84%);
   color: color-mix(in srgb, var(--color-accent) 78%, black 22%);
-  font: 700 12px/1.2 'SF Pro Rounded', system-ui;
+  font: 700 12px/1.2 var(--font-body);
   border: 1px solid color-mix(in srgb, var(--color-accent) 35%, white 65%);
 }
 
@@ -68,19 +68,19 @@
 .van-card__title {
   margin: 0;
   color: var(--color-text-primary);
-  font: 700 24px/1.2 'SF Pro Rounded', system-ui;
+  font: 700 24px/1.2 var(--font-body);
 }
 
 .van-card__class {
   margin: 0;
   color: var(--color-text-secondary);
-  font: 600 13px/1.25 'SF Pro Rounded', system-ui;
+  font: 600 13px/1.25 var(--font-body);
 }
 
 .van-card__description {
   margin: 0;
   color: color-mix(in srgb, var(--color-text-secondary) 88%, #111 12%);
-  font: 500 14px/1.5 'SF Pro Rounded', system-ui;
+  font: 500 14px/1.5 var(--font-body);
   min-height: 62px;
 }
 
@@ -97,7 +97,7 @@
   border-radius: 12px;
   background: color-mix(in srgb, var(--color-surface-secondary) 86%, #ffffff 14%);
   color: var(--color-text-primary);
-  font: 600 12px/1.2 'SF Pro Rounded', system-ui;
+  font: 600 12px/1.2 var(--font-body);
   border: 1px solid color-mix(in srgb, var(--color-surface-secondary) 70%, #ccd5e3 30%);
 }
 
@@ -109,7 +109,7 @@
 .van-card__image-skeleton,
 .van-card__line-skeleton {
   border-radius: 14px;
-  background: linear-gradient(90deg, #edf1f6 0%, #f7f9fc 45%, #edf1f6 100%);
+  background: linear-gradient(90deg, var(--color-surface-secondary) 0%, var(--color-surface-primary) 45%, var(--color-surface-secondary) 100%);
   background-size: 260% 100%;
   animation: van-skeleton 1.2s ease-in-out infinite;
 }

@@ -6,46 +6,48 @@ import { PrimaryCTA } from '../components/buttons';
 import getVansData from '../data/vansData';
 import '../assets/page/home.css';
 
-const TRUST_METRICS = [
-  { value: '10+', label: 'лет с коммерческим транспортом' },
-  { value: '95%', label: 'клиентов возвращаются повторно' },
-  { value: '1 день', label: 'средний срок типового ремонта' },
-  { value: '7/7', label: 'прием заявок без выходных' },
+// Ключевые цифры — показания «приборов» в фирменном блоке героя.
+const READOUTS = [
+  { value: '10+', unit: 'лет', label: 'с коммерческим транспортом' },
+  { value: '1', unit: 'день', label: 'средний срок типового ремонта' },
+  { value: '95', unit: '%', label: 'клиентов возвращаются повторно' },
 ];
 
-const ADVANTAGES = [
+// Почему к нам возвращаются. Mono-метка — из лексикона цеха, не декоративная нумерация.
+const VALUES = [
   {
+    tag: 'диагностика',
     icon: 'certificates',
     title: 'Прозрачная диагностика',
-    text: 'Показываем причину поломки, согласовываем стоимость до начала ремонта и фиксируем перечень работ.',
+    text: 'Показываем причину поломки и согласовываем стоимость до начала работ — без сюрпризов в счёте.',
   },
   {
+    tag: 'специализация',
     icon: 'spanner',
-    title: 'Специализация на микроавтобусах',
-    text: 'Работаем именно с коммерческим транспортом, поэтому быстро находим типовые проблемы и не тратим ваше время.',
+    title: 'Только коммерческий транспорт',
+    text: 'Работаем с микроавтобусами каждый день, поэтому типовые неисправности находим быстро.',
   },
   {
+    tag: 'сроки',
     icon: 'clock',
-    title: 'Понятные сроки',
-    text: 'Сразу называем план ремонта и держим в курсе статуса, чтобы вы могли планировать рейсы и загрузку.',
+    title: 'Сроки, которые держим',
+    text: 'Называем план ремонта сразу и держим вас в курсе статуса — вы планируете рейсы спокойно.',
   },
 ];
 
-const WORKFLOW = [
+// Реальная последовательность приёмки → нумерация здесь несёт смысл.
+const PROCESS = [
   {
-    step: '1',
     title: 'Принимаем заявку',
-    text: 'Оставляете номер телефона, мы уточняем симптомы и записываем на удобное время.',
+    text: 'Оставляете номер — уточняем симптомы и записываем на удобное время.',
   },
   {
-    step: '2',
-    title: 'Проводим диагностику',
-    text: 'Фиксируем точную причину неисправности и согласовываем смету до начала работ.',
+    title: 'Диагностика и смета',
+    text: 'Фиксируем точную причину неисправности и согласовываем стоимость до начала работ.',
   },
   {
-    step: '3',
-    title: 'Выдаём исправный автомобиль',
-    text: 'Перед выдачей проводим контрольную проверку и даем рекомендации по дальнейшему обслуживанию.',
+    title: 'Выдаём на ходу',
+    text: 'Контрольная проверка перед выдачей и рекомендации по дальнейшему обслуживанию.',
   },
 ];
 
@@ -54,115 +56,120 @@ export default function Home() {
 
   return (
     <Content>
-      <section className="home-hero fade-in-up">
-        <div className="home-hero__left">
-          <div className="home-hero__badge">
-            <Icon name="stars" size={18} />
-            <span>Сервис для коммерческого транспорта в Санкт-Петербурге</span>
+      <div className="home2">
+        {/* HERO — тезис + фирменный «диспетчерский» блок */}
+        <section className="hero" aria-labelledby="hero-title">
+          <div className="hero__lead">
+            <p className="eyebrow">
+              <span className="eyebrow__mark" aria-hidden="true" />
+              Коммерческий автосервис · Санкт-Петербург
+            </p>
+
+            <h1 id="hero-title" className="hero__title">
+              Возвращаем микроавтобусы<br />
+              <span className="accent">в работу.</span>
+            </h1>
+
+            <p className="hero__lede">
+              Диагностика, ремонт и обслуживание коммерческого транспорта — с понятной
+              сметой и сроком, который мы держим.
+            </p>
+
+            <div className="hero__actions">
+              <PrimaryCTA href="/appointments" icon={<Icon name="phone" />} text="Записаться на сервис" />
+              <a className="btn-ghost" href="/contacts">
+                <Icon name="map_picker" size={18} />
+                <span>Как нас найти</span>
+              </a>
+            </div>
           </div>
 
-          <h1 className="home-hero__title">
-            Ремонт микроавтобусов,
-            <span> которому доверяют владельцы бизнеса</span>
-          </h1>
+          {/* Signature: сервисный талон / приборный блок */}
+          <aside className="ticket" aria-label="Статус сервиса">
+            <div className="ticket__status">
+              <span className="ticket__dot" aria-hidden="true" />
+              <span className="ticket__state">На линии</span>
+              <span className="ticket__meta">приём заявок 7/7</span>
+            </div>
 
-          <p className="home-hero__subtitle">
-            Возвращаем транспорт в работу быстро, аккуратно и с понятной коммуникацией на каждом этапе. Наша цель -
-            чтобы ваш автомобиль зарабатывал, а не простаивал в ремонте.
-          </p>
+            <dl className="ticket__readouts">
+              {READOUTS.map((r) => (
+                <div className="readout" key={r.label}>
+                  <dt className="readout__value">
+                    {r.value}
+                    <span className="readout__unit">{r.unit}</span>
+                  </dt>
+                  <dd className="readout__label">{r.label}</dd>
+                </div>
+              ))}
+            </dl>
 
-          <div className="home-hero__actions">
-            <PrimaryCTA href="/appointments" icon={<Icon name="phone" />} text="Записаться на сервис" />
-            <PrimaryCTA href="/contacts" icon={<Icon name="map_picker" />} text="Как нас найти" className="home-hero__ghost" />
+            <p className="ticket__note">
+              <Icon name="phone" size={15} />
+              <span>Перезвоним в течение рабочего дня</span>
+            </p>
+          </aside>
+        </section>
+
+        {/* ПОЧЕМУ ВОЗВРАЩАЮТСЯ */}
+        <section className="block" aria-labelledby="values-title">
+          <div className="block__head">
+            <h2 id="values-title" className="block__title">Почему к нам возвращаются</h2>
+            <p className="block__sub">Меньше простоя, никакой неопределённости.</p>
           </div>
-        </div>
 
-        <aside className="home-hero__panel">
-          <h2>Почему к нам едут снова</h2>
-          <ul>
-            <li>
-              <Icon name="certificates" size={16} />
-              <span>Согласование стоимости до начала ремонта</span>
-            </li>
-            <li>
-              <Icon name="clock" size={16} />
-              <span>Соблюдение сроков и быстрые ответы по статусу</span>
-            </li>
-            <li>
-              <Icon name="smile" size={16} />
-              <span>Человечный сервис и ориентация на долгосрочное сотрудничество</span>
-            </li>
-          </ul>
-        </aside>
-      </section>
+          <div className="values">
+            {VALUES.map((v) => (
+              <article className="value" key={v.title}>
+                <div className="value__icon"><Icon name={v.icon} size={22} /></div>
+                <span className="value__tag">{v.tag}</span>
+                <h3 className="value__title">{v.title}</h3>
+                <p className="value__text">{v.text}</p>
+              </article>
+            ))}
+          </div>
+        </section>
 
-      <section className="home-metrics fade-in-up">
-        {TRUST_METRICS.map((item) => (
-          <article key={item.label} className="home-metrics__item">
-            <strong>{item.value}</strong>
-            <p>{item.label}</p>
-          </article>
-        ))}
-      </section>
+        {/* КАТАЛОГ */}
+        <section className="block block--carousel" aria-label="Микроавтобусы">
+          <Carousel
+            title={<h2 className="block__title">Какие микроавтобусы обслуживаем</h2>}
+            icon={<Icon name="van" />}
+            cards={vans.map((van, index) => (
+              <VanCard key={index} {...van} />
+            ))}
+            catalogLink="/vans"
+            catalogButtonText="Смотреть полный список"
+          />
+        </section>
 
-      <section className="home-advantages fade-in-up">
-        <header className="home-section-header">
-          <h2>Почему этот сервис безопасно рекомендовать коллегам</h2>
-          <p>Мы строим ремонт вокруг ваших задач: минимизируем простой транспорта и убираем неопределенность.</p>
-        </header>
+        {/* ПРОЦЕСС — нумерованная последовательность */}
+        <section className="block" aria-labelledby="process-title">
+          <div className="block__head">
+            <h2 id="process-title" className="block__title">Как проходит ремонт</h2>
+            <p className="block__sub">Три шага без лишних созвонов и непредсказуемых итогов.</p>
+          </div>
 
-        <div className="home-advantages__grid">
-          {ADVANTAGES.map((item) => (
-            <article key={item.title} className="home-advantages__card">
-              <div className="home-advantages__icon-wrap">
-                <Icon name={item.icon} size={24} />
-              </div>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </article>
-          ))}
-        </div>
-      </section>
+          <ol className="process">
+            {PROCESS.map((p, i) => (
+              <li className="step" key={p.title}>
+                <span className="step__num">{String(i + 1).padStart(2, '0')}</span>
+                <h3 className="step__title">{p.title}</h3>
+                <p className="step__text">{p.text}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
 
-      <section className="home-carousel-section fade-in-up">
-        <Carousel
-          title={<h2 className="home-carousel-title">Какие микроавтобусы обслуживаем</h2>}
-          icon={<Icon name="van" />}
-          cards={vans.map((van, index) => (
-            <VanCard key={index} {...van} />
-          ))}
-          catalogLink="/vans"
-          catalogButtonText="Смотреть полный список"
-        />
-      </section>
-
-      <section className="home-workflow fade-in-up">
-        <header className="home-section-header">
-          <h2>Как проходит работа с нами</h2>
-          <p>Простой процесс без лишних созвонов и непредсказуемых итогов.</p>
-        </header>
-
-        <div className="home-workflow__grid">
-          {WORKFLOW.map((item) => (
-            <article key={item.step} className="home-workflow__item">
-              <span className="home-workflow__step">{item.step}</span>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="home-final-cta fade-in-up">
-        <div>
-          <h2>Оставьте заявку и получите план ремонта уже сегодня</h2>
-          <p>Мы свяжемся с вами, уточним детали и предложим оптимальный вариант обслуживания под ваш транспорт.</p>
-        </div>
-
-        <div className="home-final-cta__actions">
+        {/* ФИНАЛЬНЫЙ CTA */}
+        <section className="closer">
+          <div className="closer__text">
+            <h2 className="closer__title">Микроавтобус должен зарабатывать, а не стоять в ремонте.</h2>
+            <p className="closer__sub">Оставьте заявку — перезвоним, уточним детали и предложим план ремонта под ваш транспорт.</p>
+          </div>
           <PrimaryCTA href="/appointments" icon={<Icon name="phone" />} text="Оставить заявку" />
-        </div>
-      </section>
+        </section>
+      </div>
     </Content>
   );
 }

@@ -35,8 +35,11 @@ export default function VanListItem({
     );
   }
 
+  const byAppointment =
+    typeof maintenanceLevel === 'string' && maintenanceLevel.toLowerCase().includes('запис');
+
   return (
-    <article className="van-list-item">
+    <article className={`van-list-item ${byAppointment ? 'is-wait' : 'is-go'}`}>
       <div className="van-list-item__thumb-wrap">
         <img src={image} alt={typeof title === 'string' ? title : 'Микроавтобус'} className="van-list-item__thumb" loading="lazy" />
       </div>
@@ -47,7 +50,10 @@ export default function VanListItem({
             <h3 className="van-list-item__title">{title}</h3>
             <p className="van-list-item__class">{vehicle_class}</p>
           </div>
-          <span className="van-list-item__status">{maintenanceLevel}</span>
+          <span className="van-list-item__status">
+            <span className="dot" aria-hidden="true" />
+            {maintenanceLevel}
+          </span>
         </div>
 
         <p className="van-list-item__description">{description}</p>

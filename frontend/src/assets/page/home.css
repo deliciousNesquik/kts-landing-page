@@ -1,339 +1,463 @@
-.home-hero,
-.home-metrics,
-.home-advantages,
-.home-carousel-section,
-.home-workflow,
-.home-final-cta {
+/* ============================================================
+   Home — редизайн «Диспетчерская сервисного цеха».
+   Всё скоупится под .home2, чтобы не задевать остальные страницы.
+   ============================================================ */
+
+.home2 {
+  /* палитра — светлая тема */
+  --paper: #f4f5f7;
+  --surface: #ffffff;
+  --ink: #15171c;
+  --slate: #565c6b;
+  --line: #e3e6eb;
+  --brand: #e1112b;
+  --asphalt: #14161b;
+  --go: #18a957;
+
+  --r: 12px;
+  --r-lg: 16px;
+
+  --display: 'IBM Plex Sans Condensed', system-ui, sans-serif;
+  --body: 'IBM Plex Sans', system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
+
   width: 100%;
+  color: var(--ink);
+  font-family: var(--body);
+  -webkit-font-smoothing: antialiased;
 }
 
-.home-hero {
+[data-theme='dark'] .home2 {
+  --paper: #0f1115;
+  --surface: #171a20;
+  --ink: #f2f3f5;
+  --slate: #9aa1ae;
+  --line: #272b33;
+  --brand: #ff3b52;
+  --asphalt: #0b0c0f;
+}
+
+/* ---------- общие элементы блоков ---------- */
+
+.home2 .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+.home2 .eyebrow__mark {
+  width: 3px;
+  height: 14px;
+  background: var(--brand);
+  border-radius: 2px;
+}
+
+.home2 .block {
+  width: 100%;
+  margin-top: clamp(56px, 8vw, 96px);
+}
+
+.home2 .block--carousel {
+  margin-top: clamp(48px, 7vw, 84px);
+}
+
+.home2 .block__head {
+  margin-bottom: 28px;
+}
+
+.home2 .block__title {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(26px, 3.6vw, 40px);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.home2 .block__sub {
+  margin: 10px 0 0;
+  max-width: 60ch;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--slate);
+}
+
+/* ---------- HERO ---------- */
+
+.home2 .hero {
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 22px;
-  align-items: stretch;
-  padding: 20px;
-  border-radius: 28px;
-  background:
-    radial-gradient(circle at 88% 10%, rgba(233, 21, 45, 0.2), transparent 38%),
-    radial-gradient(circle at 12% 100%, rgba(72, 117, 255, 0.12), transparent 40%),
-    linear-gradient(160deg, var(--color-surface-primary) 0%, color-mix(in srgb, var(--color-surface-primary) 88%, #ffffff 12%) 100%);
-  border: 1px solid color-mix(in srgb, var(--color-surface-secondary) 80%, #ffffff 20%);
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(28px, 4vw, 56px);
+  align-items: center;
+  width: 100%;
+  padding-top: 8px;
 }
 
-.home-hero__left {
+.home2 .hero__title {
+  margin: 22px 0 0;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(40px, 6.4vw, 76px);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.home2 .hero__title .accent {
+  color: var(--brand);
+}
+
+.home2 .hero__lede {
+  margin: 22px 0 0;
+  max-width: 46ch;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--slate);
+}
+
+.home2 .hero__actions {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 30px;
 }
 
-.home-hero__badge {
+.home2 .hero__actions .primary-cta {
+  min-height: 54px;
+}
+
+.home2 .btn-ghost {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  width: fit-content;
-  padding: 8px 14px;
-  border-radius: 999px;
-  font: 600 13px/1.2 'SF Pro Rounded', system-ui;
-  background: color-mix(in srgb, var(--color-accent) 14%, white 86%);
-  color: color-mix(in srgb, var(--color-accent) 78%, #111 22%);
-  border: 1px solid color-mix(in srgb, var(--color-accent) 35%, white 65%);
-}
-
-.home-hero__title {
-  margin: 0;
-  color: var(--color-text-primary);
-  font: 800 clamp(30px, 5vw, 54px) / 1.05 'SF Pro Rounded', system-ui;
-  max-width: 16ch;
-}
-
-.home-hero__title span {
-  color: var(--color-accent);
-}
-
-.home-hero__subtitle {
-  margin: 0;
-  color: color-mix(in srgb, var(--color-text-secondary) 90%, #111 10%);
-  font: 500 18px/1.55 'SF Pro Rounded', system-ui;
-  max-width: 60ch;
-}
-
-.home-hero__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 4px;
-}
-
-.home-hero__actions .primary-cta {
-  min-height: 56px;
-  padding-left: 18px;
-  padding-right: 18px;
-}
-
-.home-hero__ghost {
+  min-height: 54px;
+  padding: 0 20px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
   background: transparent;
-  color: var(--color-text-primary);
-  border: 1px solid var(--color-surface-secondary);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 0.18s ease, background 0.18s ease, transform 0.18s ease;
 }
 
-.home-hero__panel {
-  border-radius: 20px;
-  padding: 18px;
-  background: color-mix(in srgb, var(--color-canvas-primary) 70%, var(--color-surface-primary) 30%);
-  border: 1px solid color-mix(in srgb, var(--color-surface-secondary) 78%, #fff 22%);
+.home2 .btn-ghost:hover {
+  border-color: var(--ink);
+  background: color-mix(in srgb, var(--ink) 5%, transparent);
+}
+
+.home2 .btn-ghost:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+/* ---------- SIGNATURE: сервисный талон ---------- */
+
+.home2 .ticket {
+  position: relative;
+  padding: 24px 24px 20px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: 0 1px 2px rgba(20, 22, 27, 0.04), 0 18px 40px -28px rgba(20, 22, 27, 0.4);
+  overflow: hidden;
+}
+
+/* тонкая «приборная» красная полоса сверху */
+.home2 .ticket::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: var(--brand);
+}
+
+.home2 .ticket__status {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  align-items: center;
+  gap: 9px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
 }
 
-.home-hero__panel h2 {
-  margin: 0 0 12px;
-  color: var(--color-text-primary);
-  font: 700 23px/1.2 'SF Pro Rounded', system-ui;
+.home2 .ticket__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--go);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--go) 22%, transparent);
 }
 
-.home-hero__panel ul {
+.home2 .ticket__state {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.home2 .ticket__meta {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--slate);
+}
+
+.home2 .ticket__readouts {
   margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  padding: 4px 0 0;
 }
 
-.home-hero__panel li {
+.home2 .readout {
   display: flex;
-  align-items: flex-start;
+  align-items: baseline;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.home2 .readout__value {
+  flex: 0 0 auto;
+  min-width: 92px;
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 1;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.home2 .readout__unit {
+  margin-left: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--slate);
+}
+
+.home2 .readout__label {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: var(--slate);
+}
+
+.home2 .ticket__note {
+  display: flex;
+  align-items: center;
   gap: 8px;
-  color: var(--color-text-primary);
-  font: 500 14px/1.45 'SF Pro Rounded', system-ui;
+  margin: 0;
+  padding-top: 16px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--slate);
 }
 
-.home-hero__panel li svg {
-  margin-top: 3px;
-  color: var(--color-accent);
+.home2 .ticket__note svg {
+  color: var(--brand);
   flex-shrink: 0;
 }
 
-.home-metrics {
-  margin-top: 20px;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
-}
+/* ---------- ПОЧЕМУ ВОЗВРАЩАЮТСЯ ---------- */
 
-.home-metrics__item {
-  border-radius: 16px;
-  padding: 14px;
-  background: var(--color-surface-primary);
-  border: 1px solid color-mix(in srgb, var(--color-surface-secondary) 80%, #fff 20%);
-}
-
-.home-metrics__item strong {
-  display: block;
-  color: var(--color-accent);
-  font: 800 26px/1 'SF Pro Rounded', system-ui;
-}
-
-.home-metrics__item p {
-  margin: 6px 0 0;
-  color: var(--color-text-primary);
-  font: 500 13px/1.35 'SF Pro Rounded', system-ui;
-}
-
-.home-section-header {
-  margin: 0 0 14px;
-}
-
-.home-section-header h2 {
-  margin: 0;
-  color: var(--color-text-primary);
-  font: 800 clamp(24px, 3.8vw, 38px) / 1.12 'SF Pro Rounded', system-ui;
-}
-
-.home-section-header p {
-  margin: 8px 0 0;
-  color: color-mix(in srgb, var(--color-text-secondary) 88%, #111 12%);
-  font: 500 16px/1.5 'SF Pro Rounded', system-ui;
-  max-width: 75ch;
-}
-
-.home-advantages {
-  margin-top: 34px;
-}
-
-.home-advantages__grid {
+.home2 .values {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
+  gap: 16px;
 }
 
-.home-advantages__card {
-  border-radius: 20px;
-  padding: 16px;
-  background: var(--color-surface-primary);
-  border: 1px solid color-mix(in srgb, var(--color-surface-secondary) 76%, #fff 24%);
+.home2 .value {
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  transition: border-color 0.18s ease, transform 0.18s ease;
 }
 
-.home-advantages__icon-wrap {
+.home2 .value:hover {
+  border-color: color-mix(in srgb, var(--brand) 45%, var(--line));
+  transform: translateY(-3px);
+}
+
+.home2 .value__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 44px;
   height: 44px;
-  border-radius: 12px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: color-mix(in srgb, var(--color-accent) 14%, white 86%);
-  color: var(--color-accent);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--brand) 12%, var(--surface));
+  color: var(--brand);
 }
 
-.home-advantages__card h3 {
-  margin: 12px 0 8px;
-  color: var(--color-text-primary);
-  font: 700 21px/1.22 'SF Pro Rounded', system-ui;
+.home2 .value__tag {
+  display: block;
+  margin-top: 16px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--slate);
 }
 
-.home-advantages__card p {
+.home2 .value__title {
+  margin: 6px 0 8px;
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.home2 .value__text {
   margin: 0;
-  color: color-mix(in srgb, var(--color-text-secondary) 90%, #111 10%);
-  font: 500 14px/1.45 'SF Pro Rounded', system-ui;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--slate);
 }
 
-.home-carousel-section {
-  margin-top: 34px;
-}
+/* ---------- ПРОЦЕСС ---------- */
 
-.home-carousel-title {
-  margin: 0;
-  color: var(--color-text-primary);
-  font: 800 clamp(26px, 3.8vw, 40px) / 1.12 'SF Pro Rounded', system-ui;
-}
-
-.home-workflow {
-  margin-top: 28px;
-}
-
-.home-workflow__grid {
+.home2 .process {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.home-workflow__item {
-  position: relative;
-  border-radius: 20px;
-  padding: 16px;
-  background: var(--color-surface-primary);
-  border: 1px solid color-mix(in srgb, var(--color-surface-secondary) 76%, #fff 24%);
-}
-
-.home-workflow__step {
-  display: inline-flex;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  align-items: center;
-  justify-content: center;
-  background: var(--color-accent);
-  color: var(--color-text-inverse);
-  font: 700 15px/1 'SF Pro Rounded', system-ui;
-}
-
-.home-workflow__item h3 {
-  margin: 10px 0 6px;
-  color: var(--color-text-primary);
-  font: 700 21px/1.2 'SF Pro Rounded', system-ui;
-}
-
-.home-workflow__item p {
+  gap: 16px;
   margin: 0;
-  color: color-mix(in srgb, var(--color-text-secondary) 90%, #111 10%);
-  font: 500 14px/1.45 'SF Pro Rounded', system-ui;
+  padding: 0;
+  list-style: none;
+  counter-reset: none;
 }
 
-.home-final-cta {
-  margin-top: 30px;
-  border-radius: 24px;
-  padding: 20px;
-  background:
-    radial-gradient(circle at 88% 12%, rgba(233, 21, 45, 0.24), transparent 35%),
-    linear-gradient(140deg, var(--color-canvas-secondary) 0%, color-mix(in srgb, var(--color-canvas-secondary) 88%, #121316 12%) 100%);
-  color: var(--color-text-inverse);
+.home2 .step {
+  padding: 20px 4px 4px;
+  border-top: 2px solid var(--ink);
+}
+
+.home2 .step__num {
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 26px;
+  color: var(--brand);
+  font-variant-numeric: tabular-nums;
+}
+
+.home2 .step__title {
+  margin: 10px 0 6px;
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 19px;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.home2 .step__text {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--slate);
+}
+
+/* ---------- ФИНАЛЬНЫЙ CTA ---------- */
+
+.home2 .closer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   align-items: center;
-  gap: 14px;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: clamp(56px, 8vw, 96px);
+  padding: clamp(28px, 4vw, 48px);
+  background: var(--asphalt);
+  border-radius: var(--r-lg);
 }
 
-.home-final-cta h2 {
+.home2 .closer__title {
   margin: 0;
-  font: 800 clamp(24px, 3.2vw, 36px) / 1.12 'SF Pro Rounded', system-ui;
-  max-width: 18ch;
+  max-width: 22ch;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(24px, 3vw, 38px);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: #ffffff;
 }
 
-.home-final-cta p {
-  margin: 8px 0 0;
-  color: color-mix(in srgb, var(--color-text-inverse) 80%, #9aa2b2 20%);
-  font: 500 15px/1.5 'SF Pro Rounded', system-ui;
-  max-width: 62ch;
+.home2 .closer__sub {
+  margin: 12px 0 0;
+  max-width: 52ch;
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: #9aa1ae;
 }
 
-.home-final-cta__actions .primary-cta {
-  min-width: 220px;
+.home2 .closer .primary-cta {
+  min-height: 56px;
+  min-width: 210px;
+  flex-shrink: 0;
 }
 
-.fade-in-up {
-  animation: fade-in-up 0.55s ease both;
-}
+/* ---------- вход героя (с уважением к reduced-motion) ---------- */
 
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
+@media (prefers-reduced-motion: no-preference) {
+  .home2 .hero__lead > *,
+  .home2 .ticket {
+    animation: home-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .home2 .hero__lead > *:nth-child(1) { animation-delay: 0.02s; }
+  .home2 .hero__lead > *:nth-child(2) { animation-delay: 0.08s; }
+  .home2 .hero__lead > *:nth-child(3) { animation-delay: 0.14s; }
+  .home2 .hero__lead > *:nth-child(4) { animation-delay: 0.20s; }
+  .home2 .ticket { animation-delay: 0.14s; }
 }
 
-@media (max-width: 1100px) {
-  .home-hero {
+@keyframes home-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- адаптив ---------- */
+
+@media (max-width: 960px) {
+  .home2 .hero {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .home2 .values,
+  .home2 .process {
     grid-template-columns: 1fr;
   }
-
-  .home-metrics {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .home-advantages__grid,
-  .home-workflow__grid {
-    grid-template-columns: 1fr;
+  .home2 .step {
+    border-top-width: 1px;
   }
 }
 
-@media (max-width: 700px) {
-  .home-hero,
-  .home-final-cta {
-    padding: 16px;
-    border-radius: 18px;
-  }
-
-  .home-hero__subtitle {
-    font-size: 16px;
-  }
-
-  .home-hero__actions {
+@media (max-width: 560px) {
+  .home2 .hero__actions {
     flex-direction: column;
+    align-items: stretch;
   }
-
-  .home-hero__actions .primary-cta,
-  .home-final-cta__actions .primary-cta {
+  .home2 .hero__actions .primary-cta,
+  .home2 .btn-ghost {
+    width: 100%;
+    justify-content: center;
+  }
+  .home2 .closer .primary-cta {
     width: 100%;
   }
-
-  .home-metrics {
-    grid-template-columns: 1fr;
+  .home2 .readout__value {
+    font-size: 28px;
+    min-width: 80px;
   }
 }

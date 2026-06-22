@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { lazy } from 'react';
+import { lazy, Suspense } from 'react';
 import Appointments from './pages/Appointments';
 import { ThemeProvider } from './context/ThemeContext';
 import './App.css';
@@ -21,17 +21,19 @@ function App() {
         <BrowserRouter>
           <Header />
 
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/home" element={<Home />} />
+          <Suspense fallback={null}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/home" element={<Home />} />
 
-            <Route path="/vans" element={<Vans />} />
-            <Route path="/info" element={<Info />} />
-            <Route path="/contacts" element={<Contacts />} />
-            <Route path="/appointments" element={<Appointments />} />
+              <Route path="/vans" element={<Vans />} />
+              <Route path="/info" element={<Info />} />
+              <Route path="/contacts" element={<Contacts />} />
+              <Route path="/appointments" element={<Appointments />} />
 
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </Suspense>
 
           <Footer />
         </BrowserRouter>

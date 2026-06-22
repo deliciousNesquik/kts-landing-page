@@ -1,21 +1,35 @@
+/* ============================================================
+   Дизайн-система «Диспетчерская сервисного цеха» — единый источник
+   правды для всего сайта. Палитра меняется по теме, шрифты/радиусы общие.
+   ============================================================ */
+
+:root {
+  --font-display: 'IBM Plex Sans Condensed', system-ui, sans-serif;
+  --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+  --radius: 12px;
+  --radius-lg: 16px;
+}
+
 [data-theme="light"] {
-    --color-canvas-primary: #F5F5F5;
-    --color-canvas-secondary: #333333;
-    --color-surface-primary: #EEEEEE;
-    --color-surface-secondary: #DEDEDE;
-    --color-text-primary: #333333;
-    --color-text-secondary: #999999;
-    --color-text-inverse: #F5F5F5;
-    --color-accent: #E9152D;
+  --color-canvas-primary: #F4F5F7;   /* фон страницы (бумага) */
+  --color-canvas-secondary: #14161B; /* тёмные панели: шапка, подвал, secondary-кнопки */
+  --color-surface-primary: #FFFFFF;  /* карточки */
+  --color-surface-secondary: #E3E6EB;/* границы / разделители / тихие заливки */
+  --color-text-primary: #15171C;     /* графит */
+  --color-text-secondary: #565C6B;   /* приглушённый текст */
+  --color-text-inverse: #F4F5F7;     /* текст на тёмном/акценте */
+  --color-accent: #E1112B;           /* фирменный красный */
 }
 
 [data-theme="dark"] {
-    --color-canvas-primary: #1C1C1E;
-    --color-canvas-secondary: #2C2C2E;
-    --color-surface-primary: #3A3A3C;
-    --color-surface-secondary: #5C5C5E;
-    --color-text-primary: #F5F5F5;
-    --color-text-secondary: #DEDEDE;
-    --color-text-inverse: #F5F5F5;
-    --color-accent: #E9152D;
+  --color-canvas-primary: #0F1115;
+  --color-canvas-secondary: #0B0C0F;
+  --color-surface-primary: #171A20;
+  --color-surface-secondary: #272B33;
+  --color-text-primary: #F2F3F5;
+  --color-text-secondary: #9AA1AE;
+  --color-text-inverse: #F4F5F7;
+  --color-accent: #FF3B52;
 }

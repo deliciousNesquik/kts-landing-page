@@ -74,7 +74,7 @@ export default function Header() {
                             <a key={item.name} className="navigation-link" href={item.reference}>
                                 <Icon
                                     name={item.icon}
-                                    fill={item.reference === currentTab ? "#E9152D" : "none"}
+                                    fill={item.reference === currentTab ? "#E1112B" : "none"}
                                     size={isMobile ? 28 : 20}
                                 />
                                 <Text level={"2-2"} text={item.name} weight={"inverse"}></Text>

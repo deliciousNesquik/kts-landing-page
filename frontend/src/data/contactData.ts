@@ -9,6 +9,6 @@ export let linkContact = [
     'tel:+79119743896',
     'tel:+79118422474',
     'tel:+79111914252',
-    'mailto:kto-spb@yandex.ru',
+    'mailto:kts-spb@yandex.ru',
     'https://yandex.ru/maps/?text=СПБ. ул. Краснорутиловская, д. 46, корп. 7, стр. 5'
 ];
