@@ -17,3 +17,6 @@
 # Артефакты компиляции vite.config.ts (tsc -b)
 frontend/vite.config.js
 frontend/vite.config.d.ts
+
+# Локальные заметки для Claude Code — не публиковать
+CLAUDE.md

@@ -67,7 +67,9 @@ jobs:
 
       - name: Запуск деплоя на сервере
         if: steps.gate.outputs.configured == 'true'
+        env:
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
         run: |
           ssh -i ~/.ssh/id_deploy -o IdentitiesOnly=yes \
             "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" \
-            'bash REDACTED-PATH/scripts/deploy.sh'
+            "bash '${DEPLOY_PATH}/scripts/deploy.sh'"
