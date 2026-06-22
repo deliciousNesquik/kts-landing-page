@@ -1,10 +1,14 @@
-﻿include .env
+# `-include` (со знаком минус) не падает, если корневого .env нет
+# (на сервере его нет — секреты живут в backend/.env). .env нужен только
+# для целей db-migrate/db-seed.
+-include .env
 export
 
 .PHONY: frontend-install backend-install database-install install \
         frontend-start backend-start frontend-stop backend-stop \
         frontend-restart backend-restart frontend-logs backend-logs \
-        db-migrate db-seed db-show
+        db-migrate db-seed db-show \
+        deploy pm2-start pm2-stop pm2-restart pm2-status pm2-logs
 
 
 DB_PATH ?= ./backend/database
@@ -97,3 +101,29 @@ status:
 	fi
 
 stop: frontend-stop backend-stop
+
+# --- Продакшен через pm2 (рекомендуемый способ на сервере) ---
+# Цели frontend-start/backend-start выше (nohup) оставлены для совместимости,
+# но на боевом сервере процессами управляет pm2 через ecosystem.config.cjs.
+
+# Полный деплой: git pull -> install -> build -> pm2 reload -> health-check.
+deploy:
+	bash scripts/deploy.sh
+
+# Запустить (или мягко перезапустить) оба процесса под pm2.
+pm2-start:
+	pm2 startOrReload ecosystem.config.cjs --update-env && pm2 save
+
+# Остановить процессы приложения (pm2-демон продолжит работать).
+pm2-stop:
+	pm2 stop ecosystem.config.cjs
+
+# Перезапуск без простоя.
+pm2-restart:
+	pm2 reload ecosystem.config.cjs --update-env
+
+pm2-status:
+	pm2 status
+
+pm2-logs:
+	pm2 logs kts-backend kts-frontend

@@ -1,0 +1,73 @@
+name: Deploy
+
+# Когда запускать: при push в main и вручную (кнопка Run workflow во вкладке Actions).
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Не запускать два деплоя одновременно (второй подождёт первый).
+concurrency:
+  group: deploy-main
+  cancel-in-progress: false
+
+jobs:
+  # --- CI: проверка, что код собирается. Если упадёт — на сервер ничего не уедет. ---
+  ci:
+    name: Сборка и проверка типов
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Установка зависимостей
+        run: |
+          npm --prefix database install --no-audit --no-fund
+          npm --prefix backend  install --no-audit --no-fund
+          npm --prefix frontend install --no-audit --no-fund
+
+      - name: Проверка типов (database)
+        run: npm --prefix database run typecheck
+
+      - name: Проверка типов (backend)
+        run: npm --prefix backend run typecheck
+
+      - name: Сборка frontend
+        run: npm --prefix frontend run build
+
+  # --- CD: доставка на сервер по SSH. Запускается только если CI прошёл. ---
+  deploy:
+    name: Деплой на сервер
+    needs: ci
+    runs-on: ubuntu-latest
+    steps:
+      # Пока секреты не настроены — деплой аккуратно пропускается (job зелёный).
+      - name: Проверка, что секрет SSH задан
+        id: gate
+        env:
+          KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          if [ -z "$KEY" ]; then
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::Секрет SSH_PRIVATE_KEY не задан — деплой пропущен. Добавьте секреты репозитория, чтобы включить."
+          else
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Настройка SSH-ключа
+        if: steps.gate.outputs.configured == 'true'
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_deploy
+          chmod 600 ~/.ssh/id_deploy
+          ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Запуск деплоя на сервере
+        if: steps.gate.outputs.configured == 'true'
+        run: |
+          ssh -i ~/.ssh/id_deploy -o IdentitiesOnly=yes \
+            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" \
+            'bash REDACTED-PATH/scripts/deploy.sh'
