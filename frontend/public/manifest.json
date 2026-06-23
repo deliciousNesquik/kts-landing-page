@@ -1,6 +1,6 @@
 {
-  "short_name": "kts",
-  "name": "komtransservice",
+  "short_name": "Комтранссервис",
+  "name": "Комтранссервис — ремонт микроавтобусов в СПб",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "browser",
-  "theme_color": "#E9152D",
-  "background_color": "#E9152D"
+  "theme_color": "#E1112B",
+  "background_color": "#F4F5F7"
 }
